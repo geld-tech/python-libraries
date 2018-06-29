@@ -35,7 +35,7 @@ before_install:
   # Export variables containing versions and filename
   - export PACKAGE_DIR=/opt/geld/libs/python/
   - export RELEASE_VERSION=$(cat VERSION)
-  - export PACKAGE_LICENSE=$(cat LICENSE)
+  - export PACKAGE_LICENSE=$(cat LICENSE | head -n 1)
   - export BUILD_VERSION=$RELEASE_VERSION.$TRAVIS_BUILD_NUMBER
   - export BUILD_DATE=$(date "+%Y%m%d")
   - export PACKAGE_VERSION=$PACKAGE_NAME-$BUILD_VERSION
