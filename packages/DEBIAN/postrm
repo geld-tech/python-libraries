@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+echo "Post-Removal Macro"
+
+dpkg-divert --remove --package __PACKAGE_NAME__ --rename --divert /etc/geld/settings.conf.divert /etc/geld/settings.conf || true
+
+exit 0

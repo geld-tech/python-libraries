@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+echo "Pre-Installation Macro"
+
+case "$1" in
+	install)
+		if [ -f /etc/geld/settings.conf ]; then
+			echo -n "Preserving local configuration before upgrade..."
+			dpkg-divert --add --package __PACKAGE_NAME__ --rename --divert /etc/geld/settings.conf.divert /etc/geld/settings.conf
+		fi
+		;;
+	upgrade)
+		echo -n "Stopping service __PACKAGE_NAME__ ..."
+		systemctl stop __PACKAGE_NAME__ || true
+		echo " OK"
+		echo ""
+		if [ -f __PACKAGE_DIR__/config/settings.cfg ]; then
+			echo -n "Preserving local configuration before upgrade..."
+			dpkg-divert --add --package __PACKAGE_NAME__ --rename --divert /etc/geld/settings.conf.divert /etc/geld/settings.conf
+		fi
+		;;
+	abort-upgrade)
+		;;
+	*)
+		echo "Pre-Installation Macro called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+exit 0
