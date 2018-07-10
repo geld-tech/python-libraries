@@ -60,9 +60,9 @@ install:
 
 before_script:
   # Create the package directories structure
-  - mkdir $PACKAGE_VERSION/
-  - mkdir $PACKAGE_VERSION/$PACKAGE_DIR/
+  - mkdir -p $PACKAGE_VERSION/
   - mkdir -p $PACKAGE_VERSION/DEBIAN/
+  - mkdir -p $PACKAGE_VERSION/$PACKAGE_DIR/
   # Layout the files in the directories structure
   - rsync -a -r --chown=root:root sources/libraries/ $PACKAGE_VERSION/$PACKAGE_DIR
   - rsync -a -r --chown=root:root packages/DEBIAN/ $PACKAGE_VERSION/DEBIAN/
